@@ -6,7 +6,7 @@ import pandas as pd
 from datetime import datetime
 
 # Read the CSV file with proper settings
-df = pd.read_csv('prc_hicp_manr_linear.csv', low_memory=False)
+df = pd.read_csv('/Users/yssf/Desktop/DB EUROPE/dataset europe/prc_hicp_manr_cleaned.csv', low_memory=False)
 
 
 df['OBS_VALUE'] = pd.to_numeric(df['OBS_VALUE'], errors='coerce')
