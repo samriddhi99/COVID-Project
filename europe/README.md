@@ -9,8 +9,8 @@ It includes interactive dashboards built with **Python**, **Plotly Dash**, and *
 
 | File | Description |
 |------|--------------|
-| **Unemployment Analytics TSO .py** | Analytical script that processes Eurostat labour-market data (unemployment rate, youth unemployment, gender gap). Includes time-series computations and KPIs. |
-| **Unemployment Dashboard.py** | Interactive **Dash app** visualizing monthly unemployment rates, youth unemployment, and gender differences across EU countries. |
+| **Unemployment Analytics TSO .py** | Analytical script that processes Eurostat labour-market data (unemployment rate). Includes time-series computations and KPIs. |
+| **Unemployment Dashboard.py** | Interactive **Dash app** visualizing monthly unemployment rates across EU countries. |
 | **inflation dashboard.py** | Dash app visualizing **inflation trends (HICP)** across European countries from 2019 onward. Includes filtering by country and COICOP category. |
 | **cleandata.py** | Data-cleaning script for Eurostat CSV exports. Handles date parsing, numeric conversion (comma decimals → dots), and filtering (e.g., keeping data from 2019+). |
 | **dataset europe.zip** | Compressed folder containing the source Eurostat datasets used for analysis (unemployment, inflation, government measures, etc.). |
