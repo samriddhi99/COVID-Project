@@ -83,3 +83,13 @@ region_mapping = {
     'Sao Tome and Principe': 'Africa', 'Somalia': 'Africa', 'Congo, Rep.': 'Africa',
     'Congo, Dem. Rep.': 'Africa', 'Niger': 'Africa',
 }
+
+colors = {
+    'background': '#f8f9fa',
+    'card_bg': '#ffffff',
+    'primary': '#3B82F6',
+    'success': '#10B981',
+    'warning': '#F59E0B',
+    'danger': '#EF4444',
+    'purple': '#8B5CF6'
+}

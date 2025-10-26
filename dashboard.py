@@ -5,42 +5,21 @@ import plotly.express as px
 import pandas as pd
 import dash_bootstrap_components as dbc
 import os
-from constants import region_mapping
-# Initialize the Dash app with Bootstrap theme
+from constants import region_mapping, colors
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 app.title = "Global Economic Indicators Dashboard"
 
-# Load your CSV data
-try:
-    # Try standard CSV format first
-    df = pd.read_csv('datasets/data_2020_2023.csv', encoding='utf-8')
-    print("✓ Data loaded successfully!")
-    print(f"✓ Shape: {df.shape[0]} rows, {df.shape[1]} columns")
-    print(f"✓ Sample columns: {list(df.columns)[:5]}")
-    print(f"✓ Years: {sorted(df['year'].unique())}")
-    print(f"✓ Countries: {df['country_name'].nunique()}")
+df = pd.read_csv('datasets/data_2020_2023.csv', encoding='utf-8')
     
-except Exception as e:
-    print(f"❌ Error loading data: {e}")
-    print("\nPlease check:")
-    print("1. File 'economic_data.csv' exists in:", os.getcwd())
-    print("2. File has proper CSV format (comma or tab separated)")
-    print("3. Headers match: country_name, year, GDP (Current USD), etc.")
-    exit()
-
-# Clean column names
 df.columns = df.columns.str.strip()
 
-# Create computed columns with error handling
-try:
-    df['GDP_Billion'] = pd.to_numeric(df['GDP (Current USD)']) / 1e9
-    df['GDP_PerCapita'] = pd.to_numeric(df['GDP per Capita (Current USD)'], errors='coerce')
-    df['Growth_Rate'] = pd.to_numeric(df['GDP Growth (% Annual)'], errors='coerce')
-    df['Inflation_Rate'] = pd.to_numeric(df['Inflation (CPI %)'], errors='coerce')
-    df['Unemployment_Rate'] = pd.to_numeric(df['Unemployment Rate (%)'], errors='coerce')
-    print("✓ Data preprocessing complete!")
-except Exception as e:
-    print(f"Error in data preprocessing: {e}")
+
+df['GDP_Billion'] = pd.to_numeric(df['GDP (Current USD)']) / 1e9
+df['GDP_PerCapita'] = pd.to_numeric(df['GDP per Capita (Current USD)'], errors='coerce')
+df['Growth_Rate'] = pd.to_numeric(df['GDP Growth (% Annual)'], errors='coerce')
+df['Inflation_Rate'] = pd.to_numeric(df['Inflation (CPI %)'], errors='coerce')
+df['Unemployment_Rate'] = pd.to_numeric(df['Unemployment Rate (%)'], errors='coerce')
+
 
 # Get unique countries and years
 countries = sorted(df['country_name'].unique())
@@ -55,15 +34,7 @@ df['Region'] = df['country_name'].map(region_mapping).fillna('Other')
 regions = sorted(df[df['Region'] != 'Other']['Region'].unique())
 
 # Color schemes
-colors = {
-    'background': '#f8f9fa',
-    'card_bg': '#ffffff',
-    'primary': '#3B82F6',
-    'success': '#10B981',
-    'warning': '#F59E0B',
-    'danger': '#EF4444',
-    'purple': '#8B5CF6'
-}
+
 
 # Stat cards function
 def create_stat_card(title, value, subtitle, color, icon):
