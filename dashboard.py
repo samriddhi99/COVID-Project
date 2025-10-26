@@ -27,16 +27,12 @@ years = sorted(df['year'].unique())
 latest_year = df['year'].max()
 
 
-# Add region to dataframe
 df['Region'] = df['country_name'].map(region_mapping).fillna('Other')
 
-# Get unique regions
 regions = sorted(df[df['Region'] != 'Other']['Region'].unique())
 
-# Color schemes
 
 
-# Stat cards function
 def create_stat_card(title, value, subtitle, color, icon):
     return dbc.Card([
         dbc.CardBody([
@@ -59,7 +55,7 @@ def create_stat_card(title, value, subtitle, color, icon):
         ])
     ], className="shadow-sm h-100", style={'borderLeft': f'4px solid {color}'})
 
-# Header
+
 header = dbc.Navbar(
     dbc.Container([
         dbc.Row([
@@ -109,7 +105,7 @@ app.layout = html.Div([
     header,
     
     dbc.Container([
-        # Tabs for navigation
+    
         dcc.Tabs(id='tabs', value='tab-overview', children=[
             dcc.Tab(label='📊 Overview', value='tab-overview', 
                    style=tab_style, selected_style=tab_selected_style),
