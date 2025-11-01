@@ -1020,8 +1020,9 @@ def update_data_table(region, year_filter, search_text):
 
 if __name__ == '__main__':
     print("\n" + "="*60)
-    print("🚀 Dashboard is starting...")
-    print("="*60)
-    print("\n📊 Open your browser and go to: http://localhost:8050")
-    print("\n⏹️  Press CTRL+C to stop the server\n")
+    print(" Dashboard is starting...")
+    print("="*10)
+    print("\n Open browser and go to: http://localhost:8050")
+    print("\n Press CTRL+C to stop the server\n")
+
     app.run(debug=True, port=8050)
