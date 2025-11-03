@@ -1,20 +1,20 @@
 import pandas as pd
 import mysql.connector
 
-# --- Step 1: Read CSV ---
+
 csv_path = "datasets/data_2020_2023.csv"
 df = pd.read_csv(csv_path)
 
-# --- Step 2: Connect to MySQL ---
+
 conn = mysql.connector.connect(
     host="localhost",
-    user="root",           # change if different
-    password="abc123", # your password
+    user="root",          
+    password="abc123", 
     database="economic_data"
 )
 cursor = conn.cursor()
 
-# --- Step 3: Insert countries (unique) ---
+
 countries = df[['country_id', 'country_name']].drop_duplicates()
 
 for _, row in countries.iterrows():
@@ -47,13 +47,13 @@ for name in indicators:
     cursor.execute("""
         INSERT IGNORE INTO indicators (indicator_name, unit)
         VALUES (%s, %s)
-    """, (name, "%"))  # You can adjust units later
+    """, (name, "%")) 
 conn.commit()
 
-# --- Step 5: Insert data into country_indicators ---
+
 for _, row in df.iterrows():
     for name in indicators:
-        # Get the indicator_id
+       
         cursor.execute("SELECT indicator_id FROM indicators WHERE indicator_name = %s", (name,))
         indicator_id = cursor.fetchone()[0]
 
@@ -67,5 +67,3 @@ for _, row in df.iterrows():
 conn.commit()
 cursor.close()
 conn.close()
-
-print("✅ Data successfully loaded into MySQL!")
